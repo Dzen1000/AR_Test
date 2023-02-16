@@ -13,9 +13,12 @@
   <body>
     <a-scene embedded arjs>
       <a-entity scale=".2 .2 .2">
-        <a-entity gltf-model="car/scene.gltf" scale="-1 1 1"></a-entity>
+        <a-marker preset="hiro">
+          <a-entity gltf-model="car/scene.gltf" scale="-1 1 1"></a-entity>
+        </a-marker>
       </a-entity>
-      <a-marker-camera preset="hiro"></a-marker-camera>
+      <a-entity camera="zoom: 0"></a-entity>
     </a-scene>
   </body>
 </html>
+
