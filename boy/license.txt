@@ -1,0 +1,11 @@
+Model Information:
+* title:	Doodz
+* source:	https://sketchfab.com/3d-models/doodz-f5e58a45d07a42b0a1cbe2a03403a353
+* author:	Jiovanie Velazquez (https://sketchfab.com/Jiovanie)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Doodz" (https://sketchfab.com/3d-models/doodz-f5e58a45d07a42b0a1cbe2a03403a353) by Jiovanie Velazquez (https://sketchfab.com/Jiovanie) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
