@@ -6,6 +6,15 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
     <title>Hidden kitchen AR menu</title>
   </head>
+
+  <script>
+    // Workaround for an AR.js bug (https://github.com/jeromeetienne/AR.js/issues/410)
+    const sceneEl = document.querySelector("a-scene");
+    sceneEl.addEventListener("loaded", () => {
+      sceneEl.camera = new THREE.PerspectiveCamera();
+    });
+  </script>
+
   <body>
     <a-scene
       mindar-image="imageTargetSrc: targets_menu2.mind;"
