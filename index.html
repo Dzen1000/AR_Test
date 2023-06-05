@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.2.0/dist/aframe-extras.min.js"></script>
     <title>Hidden kitchen AR menu</title>
   </head>
 
@@ -24,27 +24,6 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <script>
-        AFRAME.registerComponent("smooth-position", {
-          init: function () {
-            this.targetPosition = new THREE.Vector3();
-          },
-          tick: function () {
-            var currentPosition = this.el.object3D.position;
-            this.targetPosition.lerp(currentPosition, 0.5);
-            this.el.object3D.position.copy(this.targetPosition);
-          },
-        });
-
-        AFRAME.registerComponent("fix-shake", {
-          init: function () {
-            this.el.addEventListener("loaded", () => {
-              this.el.setAttribute("smooth-position", "");
-            });
-          },
-        });
-      </script>
-
       <a-assets>
         <a-asset-item id="avatarModel" src="burger0506.glb"></a-asset-item>
         <a-asset-item id="avatarModeltext" src="text.glb"></a-asset-item>
@@ -54,17 +33,42 @@
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model
+          id="model"
           position="0 0 0"
           scale="0.2 0.2 0.2"
           src="#avatarModel"
+          smooth-movement
           animation="property: rotation; to: 0 0 360; loop: true; dur: 10000; easing: linear"
         ></a-gltf-model>
         <a-gltf-model
           position="0 0 0"
           scale="0.2 0.2 0.2"
           src="#avatarModeltext"
+          smooth-movement
         ></a-gltf-model>
       </a-entity>
     </a-scene>
+
+    <script>
+      AFRAME.registerComponent("smooth-movement", {
+        schema: {
+          smoothFactor: { default: 0.5 }, // Значение сглаживания движения
+        },
+        init: function () {
+          this.previousPosition = new THREE.Vector3();
+        },
+        tick: function () {
+          var currentPosition = this.el.object3D.position;
+          var previousPosition = this.previousPosition;
+          var smoothFactor = this.data.smoothFactor;
+
+          // Используем линейную интерполяцию (lerp) для сглаживания движения модели
+          currentPosition.lerp(previousPosition, smoothFactor);
+
+          // Обновляем предыдущую позицию
+          previousPosition.copy(currentPosition);
+        },
+      });
+    </script>
   </body>
 </html>
