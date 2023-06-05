@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
-    <title>Hidden Kitchen AR</title>
+
+    <title>Hidden kitchen AR menu</title>
   </head>
 
   <script>
@@ -23,6 +24,27 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
+      <script>
+        AFRAME.registerComponent("smooth-position", {
+          init: function () {
+            this.targetPosition = new THREE.Vector3();
+          },
+          tick: function () {
+            var currentPosition = this.el.object3D.position;
+            this.targetPosition.lerp(currentPosition, 0.5);
+            this.el.object3D.position.copy(this.targetPosition);
+          },
+        });
+
+        AFRAME.registerComponent("fix-shake", {
+          init: function () {
+            this.el.addEventListener("loaded", () => {
+              this.el.setAttribute("smooth-position", "");
+            });
+          },
+        });
+      </script>
+
       <a-assets>
         <a-asset-item id="avatarModel" src="burger0506.glb"></a-asset-item>
         <a-asset-item id="avatarModeltext" src="text.glb"></a-asset-item>
