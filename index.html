@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
-    <title>Hidden kitchen AR menu</title>
+    <title>Hidden Kitchen AR</title>
   </head>
 
   <script>
@@ -25,6 +25,7 @@
     >
       <a-assets>
         <a-asset-item id="avatarModel" src="burger0506.glb"></a-asset-item>
+        <a-asset-item id="avatarModeltext" src="text.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -35,6 +36,11 @@
           scale="0.2 0.2 0.2"
           src="#avatarModel"
           animation="property: rotation; to: 0 0 360; loop: true; dur: 10000; easing: linear"
+        ></a-gltf-model>
+        <a-gltf-model
+          position="0 0 0"
+          scale="0.2 0.2 0.2"
+          src="#avatarModeltext"
         ></a-gltf-model>
       </a-entity>
     </a-scene>
