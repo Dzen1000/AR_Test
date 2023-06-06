@@ -2,23 +2,16 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.2.0/dist/aframe-extras.min.js"></script>
+
     <title>Hidden kitchen AR menu</title>
   </head>
 
-  <script>
-    // Workaround for an AR.js bug (https://github.com/jeromeetienne/AR.js/issues/410)
-    const sceneEl = document.querySelector("a-scene");
-    sceneEl.addEventListener("loaded", () => {
-      sceneEl.camera = new THREE.PerspectiveCamera();
-    });
-  </script>
-
   <body>
     <a-scene
-      mindar-image="imageTargetSrc: targets_menu2.mind;"
+      mindar-image="imageTargetSrc: targets_menu2.mind; filterMinCF:0.001; filterBeta: 1; missTolerance: 0.1; warmupTolerance: 1;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -48,27 +41,5 @@
         ></a-gltf-model>
       </a-entity>
     </a-scene>
-
-    <script>
-      AFRAME.registerComponent("smooth-movement", {
-        schema: {
-          smoothFactor: { default: 0.5 }, // Значение сглаживания движения
-        },
-        init: function () {
-          this.previousPosition = new THREE.Vector3();
-        },
-        tick: function () {
-          var currentPosition = this.el.object3D.position;
-          var previousPosition = this.previousPosition;
-          var smoothFactor = this.data.smoothFactor;
-
-          // Используем линейную интерполяцию (lerp) для сглаживания движения модели
-          currentPosition.lerp(previousPosition, smoothFactor);
-
-          // Обновляем предыдущую позицию
-          previousPosition.copy(currentPosition);
-        },
-      });
-    </script>
   </body>
 </html>
